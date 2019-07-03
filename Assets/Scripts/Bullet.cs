@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
         if(other.tag == "Enemy")
         {
             other.GetComponentInParent<IEnemy>().Damage(GameManager.Instance.Damage);
+            BulletHitHandler.EmitFromPoint(transform.position, Quaternion.LookRotation(other.transform.forward - transform.position, Vector3.up));
         }
 
         gameObject.SetActive(false);

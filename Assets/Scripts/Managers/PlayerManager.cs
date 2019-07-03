@@ -48,7 +48,7 @@ public class PlayerManager : MonoBehaviour
     {
         if(!GameManager.Instance.IsPause)
         {
-            if(Input.GetMouseButton(0))
+            if(Input.GetMouseButton(0) && hp != 0)
             {
                 playerWeapon.Shoot();
             }
@@ -75,8 +75,9 @@ public class PlayerManager : MonoBehaviour
     public void Damage(float ammount)
     {
         hp -= ammount;
-        if(hp - ammount <= 0)
+        if(hp - ammount <= 0 && hp != 0)
         {
+            hp = 0;
             Die();
         }
 
@@ -87,6 +88,7 @@ public class PlayerManager : MonoBehaviour
     public void Die()
     {
         playerUI.UpdateHpBar(0, hpCap);
+        GameManager.Instance.EndGame();
     }
 
     private void RaycatstForward()

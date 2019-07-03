@@ -6,6 +6,8 @@ public class EnemyManager : MonoBehaviour
     public static List<IEnemy> LiveEnemies => liveEnemies;
 
     [SerializeField]
+    private PlayerManager player;
+    [SerializeField]
     private List<GameObject> enemyPrefabs;
     [SerializeField]
     private float spawnDistance = 30;
@@ -15,6 +17,15 @@ public class EnemyManager : MonoBehaviour
 
     private static List<IEnemy> liveEnemies = new List<IEnemy>();
 
+
+    public void KillAll()
+    {
+        foreach (IEnemy e in liveEnemies)
+        {
+            e.Kill();
+        }
+        liveEnemies.Clear();
+    }
 
     public void CreateWave(int enemyCount)
     {
@@ -36,7 +47,7 @@ public class EnemyManager : MonoBehaviour
 
     private void CheckEndWaveCondition()
     {
-        if(liveEnemies.Count == 0)
+        if(liveEnemies.Count == 0 && player.PlayerHP != 0)
         {
             GameManager.Instance.EndWave();
         }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class TestEnemy : Enemy, IEnemy
@@ -17,7 +18,15 @@ public class TestEnemy : Enemy, IEnemy
     }
 
     private float lastAttackTime = 0;
+    private Material materialInstance;
+    private bool isDead = false;
 
+
+    private void Start()
+    {
+        materialInstance = new Material(baseRenderer.sharedMaterial);
+        baseRenderer.material = materialInstance;
+    }
 
     private void Update()
     {
@@ -35,6 +44,17 @@ public class TestEnemy : Enemy, IEnemy
 
     public void Kill()
     {
+        isDead = true;
+        StartCoroutine(Dissolve());
+    }
+
+    private IEnumerator Dissolve()
+    {
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime)
+        {
+            materialInstance.SetFloat("Vector1_D197B0F1", t);
+            yield return null;
+        }
         Destroy(gameObject);
     }
 
@@ -46,7 +66,7 @@ public class TestEnemy : Enemy, IEnemy
             transform.LookAt(lookTarget, Vector3.up);
             transform.Translate(0,0,movementSpeed, Space.Self);
         }
-        else
+        else if(!isDead)
         {
             Attack();
         }

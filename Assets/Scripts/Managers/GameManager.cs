@@ -103,6 +103,13 @@ public class GameManager : MonoBehaviour
         player.Damage(ammount);
     }
 
+    public void EndGame()
+    {
+        isPause = true;
+        enemyManager.KillAll();
+        upgradeUI.ShowEndgame();
+    }
+
     public UpgradeAction RandomUpgrade()
     {
         UpgradeType type = (UpgradeType)Random.Range(0,6);

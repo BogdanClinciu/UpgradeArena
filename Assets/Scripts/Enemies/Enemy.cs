@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
 
     [Space]
     [SerializeField]
+    protected MeshRenderer baseRenderer;
+    [SerializeField]
     protected Animator baseAnimator;
     [SerializeField]
     protected AudioClip baseAttackSound;

@@ -50,6 +50,7 @@ MonoBehaviour:
   movementSpeed: 0.075
   attackRange: 2.5
   attackSpeed: 2
+  baseRenderer: {fileID: 6386852938983571808}
   baseAnimator: {fileID: 9143995654745087243}
   baseAttackSound: {fileID: 0}
   baseIdleSound: {fileID: 0}

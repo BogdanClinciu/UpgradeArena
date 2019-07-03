@@ -12,6 +12,10 @@ public class UpgradeUI : MonoBehaviour
     [SerializeField]
     private CanvasGroup upgradeButtonCanvas;
     [SerializeField]
+    private CanvasGroup endgameCanvas;
+
+    [Space]
+    [SerializeField]
     private LookButton[] upgradeButtons;
 
     private Vector3 targetRotation = Vector3.zero;
@@ -19,6 +23,11 @@ public class UpgradeUI : MonoBehaviour
     private void Update()
     {
         canvasTransform.rotation = Quaternion.Lerp(canvasTransform.rotation, LookRotationTarget(), Time.deltaTime * 5);
+    }
+
+    public void ShowEndgame()
+    {
+        StartCoroutine(ShowHide(endgameCanvas, true, 1));
     }
 
     public void ShowNewUpgrades()
@@ -34,28 +43,33 @@ public class UpgradeUI : MonoBehaviour
             lb.onCompleteLook.AddListener(HideUpgrades);
         }
 
-        StartCoroutine(ShowHide(true));
+        StartCoroutine(ShowHide(upgradeButtonCanvas, true));
     }
 
     public void HideUpgrades()
     {
-        StartCoroutine(ShowHide(false));
+        StartCoroutine(ShowHide(upgradeButtonCanvas, false));
     }
 
-    private IEnumerator ShowHide(bool isShow)
+    private IEnumerator ShowHide(CanvasGroup targetCanvas, bool isShow, float startDelay = 0)
     {
-        upgradeButtonCanvas.blocksRaycasts = false;
+        if(startDelay != 0)
+        {
+            yield return new WaitForSeconds(startDelay);
+        }
 
-        float fromAlpha = upgradeButtonCanvas.alpha;
+        targetCanvas.blocksRaycasts = false;
+
+        float fromAlpha = targetCanvas.alpha;
         float toAlpha = isShow ? 1 : 0;
 
         for (float t = 0.0f; t < 1.0f; t += Time.deltaTime/0.5f)
         {
-            upgradeButtonCanvas.alpha = Mathf.Lerp(fromAlpha, toAlpha, t);
+            targetCanvas.alpha = Mathf.Lerp(fromAlpha, toAlpha, t);
             yield return null;
         }
-        upgradeButtonCanvas.alpha = toAlpha;
-        upgradeButtonCanvas.blocksRaycasts = isShow;
+        targetCanvas.alpha = toAlpha;
+        targetCanvas.blocksRaycasts = isShow;
     }
 
     private Quaternion LookRotationTarget()
