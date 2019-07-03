@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/UpgradeArena.unity
+    guid: 307c7802985378345ba3720e2ca1d78c
   m_configObjects: {}

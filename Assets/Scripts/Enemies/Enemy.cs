@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected Animator baseAnimator;
     [SerializeField]
-    protected AudioClip baseAttackSound;
+    protected AudioSource baseAttackSound;
     [SerializeField]
-    protected AudioClip baseIdleSound;
+    protected AudioSource baseDieSound;
 }

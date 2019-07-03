@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public bool IsPause {get => isPause;}
     private bool isPause = false;
 
+    private bool hasStarted = false;
 
     #region Upgrade
 
@@ -68,8 +69,23 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         instance = this;
-        enemyManager.CreateWave(3);
+        hasStarted = false;
+    }
+
+    private void Update()
+    {
+        if(Input.GetMouseButtonDown(0) && !hasStarted)
+        {
+            hasStarted = true;
+            Begin();
+            playerUI.FadeIn();
+        }
+    }
+
+    public void Begin()
+    {
         playerUI.UpdateStatTexts(Damage, FireRate, Spread, BulletSize, BulletSpeed);
+        enemyManager.CreateWave(3);
     }
 
     public void RestartGame()
@@ -121,16 +137,16 @@ public class GameManager : MonoBehaviour
                 u.upgradeName = "+Damage";
                 break;
             case UpgradeType.Rate:
-                u.upgradeName = "+Fire Rate";
+                u.upgradeName = "+Rate";
                 break;
             case UpgradeType.Spread:
                 u.upgradeName = "-Spread";
                 break;
             case UpgradeType.Size:
-                u.upgradeName = "+Bullet Size";
+                u.upgradeName = "+Size";
                 break;
             case UpgradeType.Speed:
-                u.upgradeName = "+Bullet Speed";
+                u.upgradeName = "+Speed";
                 break;
             case UpgradeType.Health:
                 u.upgradeName = "+Hitpoints";

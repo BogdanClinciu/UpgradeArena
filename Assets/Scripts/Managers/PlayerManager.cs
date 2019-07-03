@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
     private float hpCap = 100;
 
     [SerializeField]
-    private GraphicRaycaster canvasRaycaster;
+    private GvrPointerGraphicRaycaster canvasRaycaster;
     [SerializeField]
     private EventSystem canvasEventSystem;
 
@@ -129,7 +129,7 @@ public class PlayerManager : MonoBehaviour
         {
             float ang = Vector3.Angle(playerTransform.forward, e.position);
             ang = Mathf.Sign(Vector3.Cross(playerTransform.forward, e.position).y) * ang;
-            if(ang > 100 || ang < -100)
+            if(ang > 60 || ang < -60)
             {
                 return (int)Mathf.Sign(ang);
             }

@@ -3,7 +3,7 @@
 public class WeaponManager : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip shootSound;
+    private AudioSource shootSound;
     [SerializeField]
     private ParticleSystem muzzleFlash;
     [SerializeField]
@@ -33,6 +33,7 @@ public class WeaponManager : MonoBehaviour
     {
         if(Time.fixedTime >= lastShotTime + basefireRate / GameManager.Instance.FireRate)
         {
+            shootSound.Play();
             animator.Play("PistolFire",0);
             lastShotTime = Time.fixedTime;
             muzzleFlash.Emit(1);

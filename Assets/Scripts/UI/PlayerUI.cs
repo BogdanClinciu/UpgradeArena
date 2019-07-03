@@ -12,6 +12,8 @@ public class PlayerUI : MonoBehaviour
     [Space]
     [SerializeField]
     private CanvasGroup hurtOverlay;
+    [SerializeField]
+    private CanvasGroup blackFade;
 
     [Space]
     #region Stat ui
@@ -96,6 +98,21 @@ public class PlayerUI : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(HurtOverlay());
+    }
+
+    public void FadeIn()
+    {
+        StartCoroutine(Fade());
+    }
+
+    private IEnumerator Fade()
+    {
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime)
+        {
+            blackFade.alpha = Mathf.Lerp(1, 0, t);
+            yield return null;
+        }
+        hurtOverlay.alpha = 0;
     }
 
     private IEnumerator HurtOverlay()

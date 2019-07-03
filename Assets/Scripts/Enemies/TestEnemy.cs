@@ -45,6 +45,7 @@ public class TestEnemy : Enemy, IEnemy
     public void Kill()
     {
         isDead = true;
+        baseDieSound.Play();
         StartCoroutine(Dissolve());
     }
 
@@ -77,6 +78,7 @@ public class TestEnemy : Enemy, IEnemy
     {
         if(lastAttackTime + attackSpeed < Time.time)
         {
+            baseAttackSound.Play();
             baseAnimator.SetTrigger("Attack");
             lastAttackTime = Time.time;
             GameManager.Instance.DamagePlayer(baseDamage);

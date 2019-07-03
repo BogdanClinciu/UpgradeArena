@@ -37,7 +37,7 @@ public class BulletPool : MonoBehaviour
     private void FireBullet(Bullet bullet)
     {
         bullet.transform.position = player.WeaponTransform.position;
-        bullet.transform.rotation = Quaternion.Lerp(player.WeaponTransform.rotation,Random.rotation, 0.025f / GameManager.Instance.Spread);
+        bullet.transform.rotation = Quaternion.Lerp(player.WeaponTransform.rotation,Random.rotation, 0.015f / GameManager.Instance.Spread);
         bullet.transform.localScale = initialBulletSize * GameManager.Instance.BulletSize;
         bullet.gameObject.SetActive(true);
     }

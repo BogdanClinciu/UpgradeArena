@@ -16,6 +16,7 @@ public class LookButton : MonoBehaviour
 
     private void OnDestroy()
     {
+        StopAllCoroutines();
         onCompleteLook.RemoveAllListeners();
     }
 
